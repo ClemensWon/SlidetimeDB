@@ -1,0 +1,23 @@
+{
+  "name": "slidetimedb",
+  "private": true,
+  "packageManager": "npm@11.6.2",
+  "workspaces": [
+    "server",
+    "client"
+  ],
+  "scripts": {
+    "dev": "npm run dev -w client",
+    "db:start": "spacetime start",
+    "db:publish": "spacetime publish slidetimedb --server local --module-path server",
+    "db:generate": "spacetime generate --lang typescript --module-path server --out-dir client/src/module_bindings"
+  },
+  "overrides": {
+    "vite": "npm:@voidzero-dev/vite-plus-core@1.5.1"
+  },
+  "dependencies": {
+    "@tailwindcss/typography": "^0.5.20",
+    "client": "^0.0.0",
+    "react-markdown": "^10.1.0"
+  }
+}

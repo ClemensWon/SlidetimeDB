@@ -1,0 +1,11 @@
+{
+  "name": "@slidetimedb/server",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "spacetimedb": "^2.15.0"
+  },
+  "devDependencies": {
+    "typescript": "^7.0.2"
+  }
+}

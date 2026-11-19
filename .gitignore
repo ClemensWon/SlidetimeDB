@@ -1,0 +1,28 @@
+# Dependencies
+node_modules/
+
+# Build output (client build and the server module bundle)
+dist/
+dist-ssr/
+*.tsbuildinfo
+
+# Caches
+.vite/
+.eslintcache
+
+# Environment files (keep an example file for reference)
+.env
+.env.*
+!.env.example
+
+# SpacetimeDB local overrides
+spacetime.local.json
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+
+# OS
+.DS_Store
+Thumbs.db
