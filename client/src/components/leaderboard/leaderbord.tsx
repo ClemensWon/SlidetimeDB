@@ -10,21 +10,25 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import type { User } from "@/module_bindings/types";
 
-export type Player = { id: string; name: string; points: number };
+export type Player = { id: string; name: string; score: number };
 
-type LeaderboardProps = { players: readonly Player[] };
+type LeaderboardProps = { players: readonly User[] };
 
 function PlayerList({ players }: LeaderboardProps) {
-  const sorted = [...players].sort((a, b) => b.points - a.points);
+  const sorted = [...players].sort((a, b) => b.score - a.score);
 
   return (
     <ol className="space-y-1">
       {sorted.map((player, index) => (
-        <li key={player.id} className="flex items-center gap-3 rounded-md px-3 py-2 odd:bg-muted/50">
+        <li
+          key={player.identity.toString()}
+          className="flex items-center gap-3 rounded-md px-3 py-2 odd:bg-muted/50"
+        >
           <span className="w-6 text-right tabular-nums text-muted-foreground">{index + 1}</span>
-          <span className="min-w-0 flex-1 truncate font-medium">{player.name}</span>
-          <span className="font-semibold tabular-nums">{player.points}</span>
+          <span className="min-w-0 flex-1 truncate font-medium">{player.userName}</span>
+          <span className="font-semibold tabular-nums">{player.score}</span>
         </li>
       ))}
     </ol>
@@ -51,7 +55,12 @@ export function LeaderboardSheet({ players }: LeaderboardProps) {
   return (
     <Sheet>
       <SheetTrigger>
-        <Button variant="outline" size="icon" className="shrink-0 lg:hidden" aria-label="Show leaderboard">
+        <Button
+          variant="outline"
+          size="icon"
+          className="shrink-0 lg:hidden"
+          aria-label="Show leaderboard"
+        >
           <Trophy />
         </Button>
       </SheetTrigger>

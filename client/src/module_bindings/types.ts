@@ -14,8 +14,20 @@ export const Deck = __t.object("Deck", {
   id: __t.u32(),
   currentSlide: __t.u32(),
   presenter: __t.option(__t.identity()),
+  get deckState() {
+    return DeckState;
+  },
 });
 export type Deck = __Infer<typeof Deck>;
+
+// The tagged union or sum type for the algebraic type `DeckState`.
+export const DeckState = __t.enum("DeckState", {
+  Prepared: __t.unit(),
+  Lobby: __t.unit(),
+  Ongoing: __t.unit(),
+  Completed: __t.unit(),
+});
+export type DeckState = __Infer<typeof DeckState>;
 
 export const Slide = __t.object("Slide", {
   id: __t.u32(),
@@ -33,4 +45,11 @@ export const SlideKind = __t.enum("SlideKind", {
   Text: __t.string(),
 });
 export type SlideKind = __Infer<typeof SlideKind>;
+
+export const User = __t.object("User", {
+  identity: __t.identity(),
+  userName: __t.string(),
+  score: __t.i32(),
+});
+export type User = __Infer<typeof User>;
 

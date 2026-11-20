@@ -1,5 +1,10 @@
 import { t, table } from "spacetimedb/server";
 
+const slideType = t.enum("slideKind", {
+  chapter: t.unit(),
+  text: t.string(),
+});
+
 export const slide = table(
   {
     name: "slide",
@@ -9,10 +14,7 @@ export const slide = table(
     id: t.u32().primaryKey(),
     deckId: t.u32(),
     title: t.string(),
-    kind: t.enum("slideKind", {
-      chapter: t.unit(),
-      text: t.string(),
-    }),
+    kind: slideType,
   },
 );
 

@@ -3,10 +3,12 @@ import type { ReducerCtx, ViewCtx } from "spacetimedb/server";
 import { schema } from "spacetimedb/server";
 import { deck } from "./tables/deck";
 import { slide } from "./tables/slide";
+import { user } from "./tables/user";
 
 export const tables = {
   deck,
   slide,
+  user,
 };
 export const spacetimedb = schema(tables);
 

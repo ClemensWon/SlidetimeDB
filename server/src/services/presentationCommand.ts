@@ -1,5 +1,6 @@
+import type { CommandCtx } from "../domain/schema";
+
 import { SenderError } from "spacetimedb";
-import { CommandCtx } from "../domain/schema";
 import { slides } from "../slides";
 
 export function usePresentationCommand(ctx: CommandCtx) {
@@ -8,6 +9,7 @@ export function usePresentationCommand(ctx: CommandCtx) {
       id: 0,
       currentSlide: 0,
       presenter: undefined,
+      deckState: { tag: "prepared" },
     });
     slides.forEach((slide, index) => {
       ctx.db.slide.insert({ ...slide, deckId: 0, id: index });
@@ -29,8 +31,17 @@ export function usePresentationCommand(ctx: CommandCtx) {
     ctx.db.deck.id.update({ ...deck, currentSlide: slideNumber });
   }
 
+  function claimdDeck() {
+    const deck = ctx.db.deck.id.find(0)
+    if (!deck) {
+      throw new SenderError("deck not available");
+    }
+    ctx.db.deck.id.update({...deck, presenter: ctx.sender, deckState: {tag: "lobby"}});
+  }
+
   return {
     init,
     goToSlide,
+    claimdDeck
   };
 }

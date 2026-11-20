@@ -1,4 +1,4 @@
-import { SlideValues } from "./domain/tables/slide";
+import type { SlideValues } from "./domain/tables/slide";
 
 export const slides: SlideValues[] = [
   {
