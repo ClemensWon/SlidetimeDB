@@ -2,7 +2,8 @@ import { usePresentationCommand } from "./services/presentationCommand";
 import { spacetimedb } from "./domain/schema";
 export { goToSlide } from "./api/reducer/goToSlite";
 export { joinDeck } from "./api/reducer/joinDeck";
-export { claimDeck} from "./api/reducer/claimDeck"
+export { claimDeck } from "./api/reducer/claimDeck";
+export { startPresentation } from "./api/reducer/startPresentation";
 
 export default spacetimedb;
 

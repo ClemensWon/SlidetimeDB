@@ -1,14 +1,14 @@
 import { t, table } from "spacetimedb/server";
 
-export const user = table(
+export const participant = table(
   {
     public: true,
   },
   {
     identity: t.identity().primaryKey(),
-    userName: t.string(),
+    name: t.string(),
     score: t.i32(),
   },
 );
 
-export type UserRow = typeof user.rowType.type;
+export type ParticipantRow = typeof participant.rowType.type;

@@ -18,7 +18,8 @@ export default __t.row({
   id: __t.u32().primaryKey(),
   currentSlide: __t.u32().name("current_slide"),
   presenter: __t.option(__t.identity()),
-  get deckState() {
-    return DeckState.name("deck_state");
+  get state() {
+    return DeckState;
   },
+  name: __t.string(),
 });

@@ -13,6 +13,7 @@ export const deck = table(
     id: t.u32().primaryKey(),
     currentSlide: t.u32(),
     presenter: t.option(t.identity()),
-    deckState: deckState,
+    state: deckState,
+    name: t.string(),
   },
 );

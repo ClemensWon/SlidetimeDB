@@ -12,6 +12,6 @@ import {
 
 export default __t.row({
   identity: __t.identity().primaryKey(),
-  userName: __t.string().name("user_name"),
+  name: __t.string(),
   score: __t.i32(),
 });

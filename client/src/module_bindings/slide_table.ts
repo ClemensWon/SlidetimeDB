@@ -15,7 +15,7 @@ import {
 
 
 export default __t.row({
-  id: __t.u32().primaryKey(),
+  slideNumber: __t.u32().primaryKey().name("slide_number"),
   deckId: __t.u32().name("deck_id"),
   title: __t.string(),
   get kind() {

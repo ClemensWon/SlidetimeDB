@@ -14,9 +14,10 @@ export const Deck = __t.object("Deck", {
   id: __t.u32(),
   currentSlide: __t.u32(),
   presenter: __t.option(__t.identity()),
-  get deckState() {
+  get state() {
     return DeckState;
   },
+  name: __t.string(),
 });
 export type Deck = __Infer<typeof Deck>;
 
@@ -29,8 +30,15 @@ export const DeckState = __t.enum("DeckState", {
 });
 export type DeckState = __Infer<typeof DeckState>;
 
+export const Participant = __t.object("Participant", {
+  identity: __t.identity(),
+  name: __t.string(),
+  score: __t.i32(),
+});
+export type Participant = __Infer<typeof Participant>;
+
 export const Slide = __t.object("Slide", {
-  id: __t.u32(),
+  slideNumber: __t.u32(),
   deckId: __t.u32(),
   title: __t.string(),
   get kind() {
@@ -45,11 +53,4 @@ export const SlideKind = __t.enum("SlideKind", {
   Text: __t.string(),
 });
 export type SlideKind = __Infer<typeof SlideKind>;
-
-export const User = __t.object("User", {
-  identity: __t.identity(),
-  userName: __t.string(),
-  score: __t.i32(),
-});
-export type User = __Infer<typeof User>;
 

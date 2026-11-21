@@ -9,15 +9,16 @@ export function usePresentationCommand(ctx: CommandCtx) {
       id: 0,
       currentSlide: 0,
       presenter: undefined,
-      deckState: { tag: "prepared" },
+      state: { tag: "prepared" },
+      name: "SlidetimeDB",
     });
     slides.forEach((slide, index) => {
-      ctx.db.slide.insert({ ...slide, deckId: 0, id: index });
+      ctx.db.slide.insert({ ...slide, deckId: 0, slideNumber: index });
     });
   }
 
   function goToSlide(slideNumber: number) {
-    const slideExists = ctx.db.slide.id.find(slideNumber) !== null;
+    const slideExists = ctx.db.slide.slideNumber.find(slideNumber) !== null;
     if (!slideExists) {
       throw new SenderError("slide not available");
     }
@@ -32,16 +33,26 @@ export function usePresentationCommand(ctx: CommandCtx) {
   }
 
   function claimdDeck() {
-    const deck = ctx.db.deck.id.find(0)
+    const deck = ctx.db.deck.id.find(0);
     if (!deck) {
       throw new SenderError("deck not available");
     }
-    ctx.db.deck.id.update({...deck, presenter: ctx.sender, deckState: {tag: "lobby"}});
+    ctx.db.deck.id.update({ ...deck, presenter: ctx.sender, state: { tag: "lobby" } });
+  }
+
+  function startPresentation() {
+    const deck = ctx.db.deck.id.find(0);
+    if (!deck) {
+      throw new SenderError("deck not available");
+    }
+
+    ctx.db.deck.id.update({ ...deck, state: { tag: "ongoing" } });
   }
 
   return {
     init,
     goToSlide,
-    claimdDeck
+    claimdDeck,
+    startPresentation,
   };
 }
