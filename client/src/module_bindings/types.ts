@@ -37,6 +37,56 @@ export const Participant = __t.object("Participant", {
 });
 export type Participant = __Infer<typeof Participant>;
 
+export const Quiz = __t.object("Quiz", {
+  id: __t.u32(),
+  question: __t.string(),
+  get state() {
+    return QuizState;
+  },
+});
+export type Quiz = __Infer<typeof Quiz>;
+
+export const QuizObject = __t.object("QuizObject", {
+  get quiz() {
+    return Quiz;
+  },
+  get options() {
+    return __t.array(QuizOption);
+  },
+  get responses() {
+    return __t.array(QuizResponse);
+  },
+});
+export type QuizObject = __Infer<typeof QuizObject>;
+
+export const QuizOption = __t.object("QuizOption", {
+  id: __t.u32(),
+  text: __t.string(),
+  isRight: __t.bool(),
+  quizId: __t.u32(),
+});
+export type QuizOption = __Infer<typeof QuizOption>;
+
+export const QuizResponse = __t.object("QuizResponse", {
+  id: __t.u32(),
+  quizId: __t.u32(),
+  identity: __t.identity(),
+  quizOptionId: __t.u32(),
+});
+export type QuizResponse = __Infer<typeof QuizResponse>;
+
+// The tagged union or sum type for the algebraic type `QuizState`.
+export const QuizState = __t.enum("QuizState", {
+  Scheduled: __t.unit(),
+  Ongoing: __t.unit(),
+  Analytics: __t.unit(),
+  Reveal: __t.unit(),
+});
+export type QuizState = __Infer<typeof QuizState>;
+
+export const QuizView = __t.object("QuizView", {});
+export type QuizView = __Infer<typeof QuizView>;
+
 export const Slide = __t.object("Slide", {
   slideNumber: __t.u32(),
   deckId: __t.u32(),
@@ -51,6 +101,7 @@ export type Slide = __Infer<typeof Slide>;
 export const SlideKind = __t.enum("SlideKind", {
   Chapter: __t.unit(),
   Text: __t.string(),
+  Quiz: __t.u32(),
 });
 export type SlideKind = __Infer<typeof SlideKind>;
 

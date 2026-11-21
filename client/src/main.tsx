@@ -5,7 +5,7 @@ import { DbConnection } from "./module_bindings";
 import App from "./App.tsx";
 import "./index.css";
 
-const HOST = "http://localhost:3000";
+const HOST = import.meta.env.VITE_DB_HOST ?? "http://localhost:3000";
 const DB_NAME = import.meta.env.VITE_SPACETIMEDB_DB_NAME ?? "slidetimedb";
 const TOKEN_KEY = `${HOST}/${DB_NAME}/auth_token`;
 

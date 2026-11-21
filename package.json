@@ -9,15 +9,10 @@
     "dev": "npm run dev -w client",
     "db:start": "spacetime start",
     "db:publish": "spacetime publish slidetimedb --server local --module-path server",
+    "db:publish:prod": "spacetime publish slidetimedb --server railway --module-path server",
     "db:generate": "spacetime generate --lang typescript --module-path server --out-dir client/src/module_bindings"
   },
-  "dependencies": {
-    "@tailwindcss/typography": "^0.5.20",
-    "client": "^0.0.0",
-    "motion": "^14.14.0",
-    "qrcode.react": "^4.2.0",
-    "react-markdown": "^10.1.0"
-  },
+  "dependencies": {},
   "overrides": {
     "vite": "npm:@voidzero-dev/vite-plus-core@1.5.1"
   },

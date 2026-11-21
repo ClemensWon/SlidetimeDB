@@ -37,6 +37,9 @@ import {
 import ClaimDeckReducer from "./claim_deck_reducer";
 import GoToSlideReducer from "./go_to_slide_reducer";
 import JoinDeckReducer from "./join_deck_reducer";
+import RespondToQuizReducer from "./respond_to_quiz_reducer";
+import RevealAnswersReducer from "./reveal_answers_reducer";
+import ShowResultsReducer from "./show_results_reducer";
 import StartPresentationReducer from "./start_presentation_reducer";
 
 // Import all procedure arg schemas
@@ -44,6 +47,7 @@ import StartPresentationReducer from "./start_presentation_reducer";
 // Import all table schema definitions
 import DeckRow from "./deck_table";
 import ParticipantRow from "./participant_table";
+import QuizViewRow from "./quiz_view_table";
 import SlideRow from "./slide_table";
 
 /** Type-only namespace exports for generated type groups. */
@@ -83,6 +87,13 @@ const tablesSchema = __schema({
       { name: 'slide_slide_number_key', constraint: 'unique', columns: ['slideNumber'] },
     ],
   }, SlideRow),
+  quizView: __table({
+    name: 'quiz_view',
+    indexes: [
+    ],
+    constraints: [
+    ],
+  }, QuizViewRow),
 });
 
 /** The schema information for all reducers in this module. This is defined the same way as the reducers would have been defined in the server, except the body of the reducer is omitted in code generation. */
@@ -90,6 +101,9 @@ const reducersSchema = __reducers(
   __reducerSchema("claim_deck", ClaimDeckReducer),
   __reducerSchema("go_to_slide", GoToSlideReducer),
   __reducerSchema("join_deck", JoinDeckReducer),
+  __reducerSchema("respond_to_quiz", RespondToQuizReducer),
+  __reducerSchema("reveal_answers", RevealAnswersReducer),
+  __reducerSchema("show_results", ShowResultsReducer),
   __reducerSchema("start_presentation", StartPresentationReducer),
 );
 

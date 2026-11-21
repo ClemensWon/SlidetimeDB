@@ -9,10 +9,16 @@ import { type Infer as __Infer } from "spacetimedb";
 import ClaimDeckReducer from "../claim_deck_reducer";
 import GoToSlideReducer from "../go_to_slide_reducer";
 import JoinDeckReducer from "../join_deck_reducer";
+import RespondToQuizReducer from "../respond_to_quiz_reducer";
+import RevealAnswersReducer from "../reveal_answers_reducer";
+import ShowResultsReducer from "../show_results_reducer";
 import StartPresentationReducer from "../start_presentation_reducer";
 
 export type ClaimDeckParams = __Infer<typeof ClaimDeckReducer>;
 export type GoToSlideParams = __Infer<typeof GoToSlideReducer>;
 export type JoinDeckParams = __Infer<typeof JoinDeckReducer>;
+export type RespondToQuizParams = __Infer<typeof RespondToQuizReducer>;
+export type RevealAnswersParams = __Infer<typeof RevealAnswersReducer>;
+export type ShowResultsParams = __Infer<typeof ShowResultsReducer>;
 export type StartPresentationParams = __Infer<typeof StartPresentationReducer>;
 
