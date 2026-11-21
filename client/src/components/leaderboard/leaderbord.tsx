@@ -10,11 +10,11 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import type { User } from "@/module_bindings/types";
+import type { Participant } from "@/module_bindings/types";
 
 export type Player = { id: string; name: string; score: number };
 
-type LeaderboardProps = { players: readonly User[] };
+type LeaderboardProps = { players: readonly Participant[] };
 
 function PlayerList({ players }: LeaderboardProps) {
   const sorted = [...players].sort((a, b) => b.score - a.score);
@@ -27,7 +27,7 @@ function PlayerList({ players }: LeaderboardProps) {
           className="flex items-center gap-3 rounded-md px-3 py-2 odd:bg-muted/50"
         >
           <span className="w-6 text-right tabular-nums text-muted-foreground">{index + 1}</span>
-          <span className="min-w-0 flex-1 truncate font-medium">{player.userName}</span>
+          <span className="min-w-0 flex-1 truncate font-medium">{player.name}</span>
           <span className="font-semibold tabular-nums">{player.score}</span>
         </li>
       ))}

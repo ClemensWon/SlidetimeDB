@@ -8,7 +8,7 @@ export function useParticipant(deck: Deck, users: readonly Participant[]) {
 
   return {
     currentUser,
-    isPresenter: !!identity && deck.presenter.isEqual(identity),
+    isPresenter: !!identity && !!deck.presenter && deck.presenter.isEqual(identity),
     hasJoined: currentUser !== undefined,
   };
 }
