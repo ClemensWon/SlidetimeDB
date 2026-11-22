@@ -2,7 +2,13 @@ import { usePresentationCommand } from "./services/commands/presentationCommand"
 import { spacetimedb } from "./domain/schema";
 
 // reducers
-export { goToSlide, joinDeck, claimDeck, startPresentation } from "./api/reducers/presentation";
+export {
+  goToSlide,
+  joinDeck,
+  claimDeck,
+  startPresentation,
+  resetPresentation,
+} from "./api/reducers/presentation";
 export { startQuiz, respondToQuiz, revealAnswers, showResults } from "./api/reducers/quiz";
 export {
   joinTeamTugOfWar,

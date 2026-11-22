@@ -6,8 +6,8 @@ type TextSlideProps = {
 
 export function TextSlideContent(props: TextSlideProps) {
   return (
-    <article className="prose prose-lg max-w-none dark:prose-invert lg:prose-xl">
+    <div className="prose prose-xl dark:prose-invert max-w-none text-left">
       <Markdown>{props.content}</Markdown>
-    </article>
+    </div>
   );
 }

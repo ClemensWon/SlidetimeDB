@@ -1,10 +1,9 @@
 import type { Deck, Slide, Participant } from "@/module_bindings/types";
 
-import { reducers } from "@/module_bindings";
-import { useEffect } from "react";
-import { useReducer } from "spacetimedb/react";
+import { useSpacetimeDB } from "spacetimedb/react";
+import { AdminBar } from "../action-bar/admin-bar";
 import { Leaderboard, LeaderboardSheet } from "../leaderboard/leaderbord";
-import { ReactionBar } from "../reactions/reaction-bar";
+import { ReactionBar } from "../action-bar/reaction-bar";
 import { SlideView } from "../slide/slide";
 import { SlideHeader } from "../slide/slide-header";
 
@@ -17,19 +16,10 @@ export function Presentation({
   slides: readonly Slide[];
   participants: readonly Participant[];
 }) {
-  const goToSlide = useReducer(reducers.goToSlide);
+  const { identity } = useSpacetimeDB();
+  const isPresenter = !!identity && !!deck.presenter?.isEqual(identity);
+
   const currentSlideNumber = deck.currentSlide;
-
-  useEffect(() => {
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "ArrowRight")
-        goToSlide({ slideNumber: Math.min(currentSlideNumber + 1, slides.length - 1) });
-      if (e.key === "ArrowLeft") goToSlide({ slideNumber: Math.max(currentSlideNumber - 1, 0) });
-    };
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, [currentSlideNumber, slides.length, goToSlide]);
-
   const slide = slides.find((slide) => slide.slideNumber === currentSlideNumber);
 
   return (
@@ -55,7 +45,15 @@ export function Presentation({
           )}
         </main>
 
-        <ReactionBar onReact={(emoji) => console.log("reaction", emoji)} />
+        {isPresenter ? (
+          <AdminBar
+            currentSlide={currentSlideNumber}
+            slideCount={slides.length}
+            participantCount={participants.length}
+          />
+        ) : (
+          <ReactionBar onReact={(emoji) => console.log("reaction", emoji)} />
+        )}
       </div>
 
       <aside className="hidden w-72 shrink-0 lg:block">

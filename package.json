@@ -14,7 +14,10 @@
     "db:publish:prod": "spacetime publish slidetimedb --server railway --module-path server",
     "db:generate": "spacetime generate --lang typescript --module-path server --out-dir client/src/module_bindings"
   },
-  "dependencies": {},
+  "dependencies": {
+    "@tailwindcss/typography": "^0.5.20",
+    "client": "^0.0.0"
+  },
   "overrides": {
     "vite": "npm:@voidzero-dev/vite-plus-core@1.5.1"
   },

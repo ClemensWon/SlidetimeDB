@@ -40,6 +40,7 @@ import JoinDeckReducer from "./join_deck_reducer";
 import JoinTeamTugOfWarReducer from "./join_team_tug_of_war_reducer";
 import OpenTeamsTugOfWarReducer from "./open_teams_tug_of_war_reducer";
 import PullOnTugReducer from "./pull_on_tug_reducer";
+import ResetPresentationReducer from "./reset_presentation_reducer";
 import RespondToQuizReducer from "./respond_to_quiz_reducer";
 import RevealAnswersReducer from "./reveal_answers_reducer";
 import ShowResultsReducer from "./show_results_reducer";
@@ -136,6 +137,7 @@ const reducersSchema = __reducers(
   __reducerSchema("join_team_tug_of_war", JoinTeamTugOfWarReducer),
   __reducerSchema("open_teams_tug_of_war", OpenTeamsTugOfWarReducer),
   __reducerSchema("pull_on_tug", PullOnTugReducer),
+  __reducerSchema("reset_presentation", ResetPresentationReducer),
   __reducerSchema("respond_to_quiz", RespondToQuizReducer),
   __reducerSchema("reveal_answers", RevealAnswersReducer),
   __reducerSchema("show_results", ShowResultsReducer),

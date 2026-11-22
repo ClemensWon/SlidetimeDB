@@ -108,8 +108,10 @@ export type Slide = __Infer<typeof Slide>;
 export const SlideKind = __t.enum("SlideKind", {
   Chapter: __t.unit(),
   Text: __t.string(),
+  Image: __t.string(),
   Quiz: __t.u32(),
   TugOfWar: __t.u32(),
+  Code: __t.string(),
 });
 export type SlideKind = __Infer<typeof SlideKind>;
 

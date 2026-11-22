@@ -22,3 +22,9 @@ export const startPresentation = spacetimedb.reducer({}, (ctx) => {
   const presentationCommand = usePresentationCommand(ctx);
   presentationCommand.startPresentation();
 });
+
+export const resetPresentation = spacetimedb.reducer({}, (ctx) => {
+  const presentationCommand = usePresentationCommand(ctx);
+  console.debug("[SlidetimeDB] reset called");
+  presentationCommand.reset();
+});

@@ -7,18 +7,16 @@ import { useUserQuery } from "../queries/userQuery";
 import { options, quizes } from "../../presentation/quizes";
 import { teams, tugOfWars } from "../../presentation/tugOfWar";
 
+function clearTable<Row>(table: { iter(): Iterable<Row>; delete(row: Row): boolean }) {
+  // oxlint-disable-next-line unicorn/no-useless-spread
+  for (const row of [...table.iter()]) table.delete(row);
+}
+
 export function usePresentationCommand(ctx: CommandCtx) {
   const deckQuery = useDeckQuery(ctx.db);
   const userQuery = useUserQuery(ctx.db);
 
-  function init() {
-    ctx.db.deck.insert({
-      id: 0,
-      currentSlide: 0,
-      presenter: undefined,
-      state: { tag: "prepared" },
-      name: "SlidetimeDB",
-    });
+  function seedContent() {
     slides.forEach((slide, index) => {
       ctx.db.slide.insert({ ...slide, deckId: 0, slideNumber: index });
     });
@@ -39,6 +37,39 @@ export function usePresentationCommand(ctx: CommandCtx) {
     teams.forEach((team) => {
       ctx.db.team.insert({ ...team, members: [] });
     });
+  }
+
+  function init() {
+    ctx.db.deck.insert({
+      id: 0,
+      currentSlide: 0,
+      presenter: undefined,
+      state: { tag: "prepared" },
+      name: "SlidetimeDB",
+    });
+    seedContent();
+  }
+
+  function reset() {
+    userQuery.throwIfNotPresenter(ctx.sender);
+
+    clearTable(ctx.db.slide);
+    clearTable(ctx.db.quizResponse); // guessed name: use your quiz response table
+    clearTable(ctx.db.quizOption);
+    clearTable(ctx.db.quiz);
+    clearTable(ctx.db.team);
+    clearTable(ctx.db.tugOfWar);
+    seedContent();
+
+    // Keep participants joined, but wipe their scores.
+    for (const participant of [...ctx.db.participant.iter()]) {
+      ctx.db.participant.identity.update({ ...participant, score: 0 });
+    }
+
+    // Stay on the current slide, unless the deck got shorter.
+    const deck = deckQuery.getDeckOrThrow();
+    const lastSlide = Math.max(slides.length - 1, 0);
+    ctx.db.deck.id.update({ ...deck, currentSlide: Math.min(deck.currentSlide, lastSlide) });
   }
 
   function goToSlide(slideNumber: number) {
@@ -71,5 +102,6 @@ export function usePresentationCommand(ctx: CommandCtx) {
     goToSlide,
     claimdDeck,
     startPresentation,
+    reset,
   };
 }

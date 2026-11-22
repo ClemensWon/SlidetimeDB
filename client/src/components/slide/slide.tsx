@@ -6,6 +6,7 @@ import { TextSlideContent } from "./text-slide";
 import { QuizPresenterSlide } from "./quiz/quizPresenterSlide";
 import { TugOfWarPresenterSlide } from "./tugOfWar/TugOfWarPresenterSlide";
 import { TugOfWarAudienceSlide } from "./tugOfWar/TugOfWarAudienceSlide";
+import { CodeSlide } from "./code-slide";
 
 type SlideProps = { slide: Slide; deck: Deck; particpiants: readonly Participant[] };
 
@@ -14,6 +15,8 @@ export function SlideView(props: SlideProps) {
   switch (props.slide.kind.tag) {
     case "Text":
       return <TextSlideContent content={props.slide.kind.value} />;
+    case "Code":
+      return <CodeSlide code={props.slide.kind.value} />;
     case "Quiz":
       return isPresenter ? (
         <QuizPresenterSlide quizId={props.slide.kind.value} />
