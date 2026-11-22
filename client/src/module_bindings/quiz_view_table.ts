@@ -11,8 +11,8 @@ import {
 } from "spacetimedb";
 import {
   Quiz,
-  QuizOption,
   QuizResponse,
+  DisplayOption,
 } from "./types";
 
 
@@ -21,7 +21,7 @@ export default __t.row({
     return Quiz;
   },
   get options() {
-    return __t.array(QuizOption);
+    return __t.array(DisplayOption);
   },
   get responses() {
     return __t.array(QuizResponse);

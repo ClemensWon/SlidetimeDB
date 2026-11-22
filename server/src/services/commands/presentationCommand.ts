@@ -5,6 +5,7 @@ import { slides } from "../../presentation/slides";
 import { useDeckQuery } from "../queries/deckQuery";
 import { useUserQuery } from "../queries/userQuery";
 import { options, quizes } from "../../presentation/quizes";
+import { teams, tugOfWars } from "../../presentation/tugOfWar";
 
 export function usePresentationCommand(ctx: CommandCtx) {
   const deckQuery = useDeckQuery(ctx.db);
@@ -27,9 +28,21 @@ export function usePresentationCommand(ctx: CommandCtx) {
     options.forEach((option) => {
       ctx.db.quizOption.insert(option);
     });
+    tugOfWars.forEach((tugOfWar) => {
+      ctx.db.tugOfWar.insert({
+        ...tugOfWar,
+        score: 0,
+        updateCount: 0,
+        state: { tag: "scheduled" },
+      });
+    });
+    teams.forEach((team) => {
+      ctx.db.team.insert({ ...team, members: [] });
+    });
   }
 
   function goToSlide(slideNumber: number) {
+    userQuery.throwIfNotPresenter(ctx.sender);
     const slideExists = ctx.db.slide.slideNumber.find(slideNumber) !== null;
     if (!slideExists) {
       throw new SenderError("slide not available");
@@ -47,7 +60,7 @@ export function usePresentationCommand(ctx: CommandCtx) {
   }
 
   function startPresentation() {
-    userQuery.isSenderPresenter(ctx.sender);
+    userQuery.throwIfNotPresenter(ctx.sender);
     const deck = deckQuery.getDeckOrThrow();
 
     ctx.db.deck.id.update({ ...deck, state: { tag: "ongoing" } });

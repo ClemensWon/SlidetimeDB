@@ -13,14 +13,14 @@ const PHASE_LABEL = {
   Reveal: "Answer revealed",
 } as const;
 
-export function QuizSlide() {
+export function QuizAudienceSlide({ quizId }: { quizId: number }) {
   const { identity } = useSpacetimeDB();
   const [rows, isReady] = useTable(tables.quizView);
   const respondToQuiz = useReducer(reducers.respondToQuiz);
 
   if (!isReady) return <OptionPlaceholders />;
 
-  const [row] = rows;
+  const row = rows.find((quiz) => quiz.quiz.id === quizId);
   if (!row) return <p className="text-muted-foreground">No quiz available.</p>;
 
   const { quiz, responses } = row;

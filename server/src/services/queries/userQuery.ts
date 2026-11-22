@@ -17,6 +17,6 @@ export function useUserQuery(db: DbReadAccess) {
     }
   }
   return {
-    isSenderPresenter: throwIfNotPresenter,
+    throwIfNotPresenter,
   };
 }

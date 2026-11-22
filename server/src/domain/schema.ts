@@ -1,12 +1,19 @@
 import type { ReducerCtx, ViewCtx } from "spacetimedb/server";
 
+// presentation
 import { schema } from "spacetimedb/server";
 import { deck } from "./tables/deck";
 import { slide } from "./tables/slide";
 import { participant } from "./tables/participant";
+
+// quiz
 import { quiz } from "./tables/quiz";
 import { quizResponse } from "./tables/quizResponse";
 import { quizOption } from "./tables/quizOption";
+
+// tugOfWar
+import { tugOfWar } from "./tables/tugOfWar";
+import { team } from "./tables/teamMembership";
 
 export const tables = {
   deck,
@@ -15,6 +22,8 @@ export const tables = {
   quiz,
   quizOption,
   quizResponse,
+  tugOfWar,
+  team,
 };
 export const spacetimedb = schema(tables);
 

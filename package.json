@@ -6,7 +6,9 @@
     "client"
   ],
   "scripts": {
-    "dev": "npm run dev -w client",
+    "client:dev": "npm run dev -w client",
+    "client:dev:prod": "npm run dev -w client -- --mode production",
+    "client:build": "npm run build -w client",
     "db:start": "spacetime start",
     "db:publish": "spacetime publish slidetimedb --server local --module-path server",
     "db:publish:prod": "spacetime publish slidetimedb --server railway --module-path server",

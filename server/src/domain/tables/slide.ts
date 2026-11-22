@@ -4,6 +4,7 @@ const slideKind = t.enum("slideKind", {
   chapter: t.unit(),
   text: t.string(),
   quiz: t.u32(),
+  tugOfWar: t.u32(),
 });
 
 export const slide = table(

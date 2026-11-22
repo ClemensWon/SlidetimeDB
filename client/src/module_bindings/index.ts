@@ -37,10 +37,15 @@ import {
 import ClaimDeckReducer from "./claim_deck_reducer";
 import GoToSlideReducer from "./go_to_slide_reducer";
 import JoinDeckReducer from "./join_deck_reducer";
+import JoinTeamTugOfWarReducer from "./join_team_tug_of_war_reducer";
+import OpenTeamsTugOfWarReducer from "./open_teams_tug_of_war_reducer";
+import PullOnTugReducer from "./pull_on_tug_reducer";
 import RespondToQuizReducer from "./respond_to_quiz_reducer";
 import RevealAnswersReducer from "./reveal_answers_reducer";
 import ShowResultsReducer from "./show_results_reducer";
 import StartPresentationReducer from "./start_presentation_reducer";
+import StartQuizReducer from "./start_quiz_reducer";
+import StartTugOfWarReducer from "./start_tug_of_war_reducer";
 
 // Import all procedure arg schemas
 
@@ -49,6 +54,8 @@ import DeckRow from "./deck_table";
 import ParticipantRow from "./participant_table";
 import QuizViewRow from "./quiz_view_table";
 import SlideRow from "./slide_table";
+import TeamRow from "./team_table";
+import TugOfWarRow from "./tug_of_war_table";
 
 /** Type-only namespace exports for generated type groups. */
 
@@ -87,6 +94,31 @@ const tablesSchema = __schema({
       { name: 'slide_slide_number_key', constraint: 'unique', columns: ['slideNumber'] },
     ],
   }, SlideRow),
+  team: __table({
+    name: 'team',
+    indexes: [
+      { accessor: 'id', name: 'team_id_idx_btree', algorithm: 'btree', columns: [
+        'id',
+      ] },
+      { accessor: 'tugOfWarId', name: 'team_tug_of_war_id_idx_btree', algorithm: 'btree', columns: [
+        'tugOfWarId',
+      ] },
+    ],
+    constraints: [
+      { name: 'team_id_key', constraint: 'unique', columns: ['id'] },
+    ],
+  }, TeamRow),
+  tugOfWar: __table({
+    name: 'tug_of_war',
+    indexes: [
+      { accessor: 'id', name: 'tug_of_war_id_idx_btree', algorithm: 'btree', columns: [
+        'id',
+      ] },
+    ],
+    constraints: [
+      { name: 'tug_of_war_id_key', constraint: 'unique', columns: ['id'] },
+    ],
+  }, TugOfWarRow),
   quizView: __table({
     name: 'quiz_view',
     indexes: [
@@ -101,10 +133,15 @@ const reducersSchema = __reducers(
   __reducerSchema("claim_deck", ClaimDeckReducer),
   __reducerSchema("go_to_slide", GoToSlideReducer),
   __reducerSchema("join_deck", JoinDeckReducer),
+  __reducerSchema("join_team_tug_of_war", JoinTeamTugOfWarReducer),
+  __reducerSchema("open_teams_tug_of_war", OpenTeamsTugOfWarReducer),
+  __reducerSchema("pull_on_tug", PullOnTugReducer),
   __reducerSchema("respond_to_quiz", RespondToQuizReducer),
   __reducerSchema("reveal_answers", RevealAnswersReducer),
   __reducerSchema("show_results", ShowResultsReducer),
   __reducerSchema("start_presentation", StartPresentationReducer),
+  __reducerSchema("start_quiz", StartQuizReducer),
+  __reducerSchema("start_tug_of_war", StartTugOfWarReducer),
 );
 
 /** The schema information for all procedures in this module. This is defined the same way as the procedures would have been defined in the server. */

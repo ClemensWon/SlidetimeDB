@@ -2,13 +2,14 @@ import { usePresentationCommand } from "./services/commands/presentationCommand"
 import { spacetimedb } from "./domain/schema";
 
 // reducers
-export { goToSlide } from "./api/reducers/presentation/goToSlite";
-export { joinDeck } from "./api/reducers/presentation/joinDeck";
-export { claimDeck } from "./api/reducers/presentation/claimDeck";
-export { startPresentation } from "./api/reducers/presentation/startPresentation";
-export { revealAnswers } from "./api/reducers/quiz/revealAnswers";
-export { showResults } from "./api/reducers/quiz/showResults";
-export { respondToQuiz } from "./api/reducers/quiz/respondToQuiz";
+export { goToSlide, joinDeck, claimDeck, startPresentation } from "./api/reducers/presentation";
+export { startQuiz, respondToQuiz, revealAnswers, showResults } from "./api/reducers/quiz";
+export {
+  joinTeamTugOfWar,
+  openTeamsTugOfWar,
+  pullOnTug,
+  startTugOfWar,
+} from "./api/reducers/tugOfWar";
 
 // views
 

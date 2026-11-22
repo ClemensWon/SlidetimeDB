@@ -17,7 +17,7 @@ function routeBasedOnDeckState(
     case "Lobby":
       return <Lobby participants={participants} deck={deck} />;
     case "Ongoing":
-      return <Presentation deck={deck} slides={slides} users={participants} />;
+      return <Presentation deck={deck} slides={slides} participants={participants} />;
   }
 }
 

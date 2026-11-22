@@ -2,7 +2,7 @@ import { SenderError } from "spacetimedb";
 import type { DbReadAccess } from "../../domain/schema";
 import { useDeckQuery } from "./deckQuery";
 import { useSlideQuery } from "./slideQuery";
-import type { QuizObject } from "../../domain/objects/quizResult";
+import type { DisplayOption, QuizObject } from "../../domain/objects/quizResult";
 import { useQuizResponseQuery } from "./quizResponse";
 import { useQuizOption } from "./quizOptionQuery";
 
@@ -31,8 +31,11 @@ export function useQuizQuery(db: DbReadAccess) {
 
   function getQuizObject(): QuizObject {
     const quiz = getCurrent();
+    const revealAnswer = quiz.state.tag === "reveal";
     const responses = quizResponseQuery.getByQuizId(quiz.id);
-    const options = quizOptionQuery.getByQuizId(quiz.id);
+    const options: DisplayOption[] = quizOptionQuery
+      .getByQuizId(quiz.id)
+      .map((option) => ({ ...option, isRight: revealAnswer ? option.isRight : undefined }));
     return {
       quiz,
       responses,

@@ -9,16 +9,26 @@ import { type Infer as __Infer } from "spacetimedb";
 import ClaimDeckReducer from "../claim_deck_reducer";
 import GoToSlideReducer from "../go_to_slide_reducer";
 import JoinDeckReducer from "../join_deck_reducer";
+import JoinTeamTugOfWarReducer from "../join_team_tug_of_war_reducer";
+import OpenTeamsTugOfWarReducer from "../open_teams_tug_of_war_reducer";
+import PullOnTugReducer from "../pull_on_tug_reducer";
 import RespondToQuizReducer from "../respond_to_quiz_reducer";
 import RevealAnswersReducer from "../reveal_answers_reducer";
 import ShowResultsReducer from "../show_results_reducer";
 import StartPresentationReducer from "../start_presentation_reducer";
+import StartQuizReducer from "../start_quiz_reducer";
+import StartTugOfWarReducer from "../start_tug_of_war_reducer";
 
 export type ClaimDeckParams = __Infer<typeof ClaimDeckReducer>;
 export type GoToSlideParams = __Infer<typeof GoToSlideReducer>;
 export type JoinDeckParams = __Infer<typeof JoinDeckReducer>;
+export type JoinTeamTugOfWarParams = __Infer<typeof JoinTeamTugOfWarReducer>;
+export type OpenTeamsTugOfWarParams = __Infer<typeof OpenTeamsTugOfWarReducer>;
+export type PullOnTugParams = __Infer<typeof PullOnTugReducer>;
 export type RespondToQuizParams = __Infer<typeof RespondToQuizReducer>;
 export type RevealAnswersParams = __Infer<typeof RevealAnswersReducer>;
 export type ShowResultsParams = __Infer<typeof ShowResultsReducer>;
 export type StartPresentationParams = __Infer<typeof StartPresentationReducer>;
+export type StartQuizParams = __Infer<typeof StartQuizReducer>;
+export type StartTugOfWarParams = __Infer<typeof StartTugOfWarReducer>;
 

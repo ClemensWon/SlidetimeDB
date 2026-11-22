@@ -22,4 +22,18 @@ export const slides: SlideValues[] = [
       value: 0,
     },
   },
+  {
+    title: "Lets do a performance test",
+    kind: {
+      tag: "tugOfWar",
+      value: 0,
+    },
+  },
+  {
+    title: "and another one",
+    kind: {
+      tag: "tugOfWar",
+      value: 1,
+    },
+  },
 ];

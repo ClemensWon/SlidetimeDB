@@ -30,6 +30,13 @@ export const DeckState = __t.enum("DeckState", {
 });
 export type DeckState = __Infer<typeof DeckState>;
 
+export const DisplayOption = __t.object("DisplayOption", {
+  id: __t.u32(),
+  text: __t.string(),
+  isRight: __t.option(__t.bool()),
+});
+export type DisplayOption = __Infer<typeof DisplayOption>;
+
 export const Participant = __t.object("Participant", {
   identity: __t.identity(),
   name: __t.string(),
@@ -51,7 +58,7 @@ export const QuizObject = __t.object("QuizObject", {
     return Quiz;
   },
   get options() {
-    return __t.array(QuizOption);
+    return __t.array(DisplayOption);
   },
   get responses() {
     return __t.array(QuizResponse);
@@ -102,6 +109,45 @@ export const SlideKind = __t.enum("SlideKind", {
   Chapter: __t.unit(),
   Text: __t.string(),
   Quiz: __t.u32(),
+  TugOfWar: __t.u32(),
 });
 export type SlideKind = __Infer<typeof SlideKind>;
+
+export const Team = __t.object("Team", {
+  id: __t.u32(),
+  tugOfWarId: __t.u32(),
+  members: __t.array(__t.identity()),
+  name: __t.string(),
+  get teamType() {
+    return TeamType;
+  },
+});
+export type Team = __Infer<typeof Team>;
+
+// The tagged union or sum type for the algebraic type `TeamType`.
+export const TeamType = __t.enum("TeamType", {
+  TeamA: __t.unit(),
+  TeamB: __t.unit(),
+});
+export type TeamType = __Infer<typeof TeamType>;
+
+export const TugOfWar = __t.object("TugOfWar", {
+  id: __t.u32(),
+  name: __t.string(),
+  score: __t.i32(),
+  updateCount: __t.u32(),
+  get state() {
+    return TugOfWarState;
+  },
+});
+export type TugOfWar = __Infer<typeof TugOfWar>;
+
+// The tagged union or sum type for the algebraic type `TugOfWarState`.
+export const TugOfWarState = __t.enum("TugOfWarState", {
+  Scheduled: __t.unit(),
+  JoiningTeams: __t.unit(),
+  Ongoing: __t.unit(),
+  Results: __t.unit(),
+});
+export type TugOfWarState = __Infer<typeof TugOfWarState>;
 
