@@ -35,6 +35,7 @@ import {
 
 // Import all reducer arg schemas
 import ClaimDeckReducer from "./claim_deck_reducer";
+import ClaimPoinsReducer from "./claim_poins_reducer";
 import GoToSlideReducer from "./go_to_slide_reducer";
 import JoinDeckReducer from "./join_deck_reducer";
 import JoinTeamTugOfWarReducer from "./join_team_tug_of_war_reducer";
@@ -132,6 +133,7 @@ const tablesSchema = __schema({
 /** The schema information for all reducers in this module. This is defined the same way as the reducers would have been defined in the server, except the body of the reducer is omitted in code generation. */
 const reducersSchema = __reducers(
   __reducerSchema("claim_deck", ClaimDeckReducer),
+  __reducerSchema("claim_poins", ClaimPoinsReducer),
   __reducerSchema("go_to_slide", GoToSlideReducer),
   __reducerSchema("join_deck", JoinDeckReducer),
   __reducerSchema("join_team_tug_of_war", JoinTeamTugOfWarReducer),

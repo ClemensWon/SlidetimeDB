@@ -16,9 +16,9 @@ export {
   pullOnTug,
   startTugOfWar,
 } from "./api/reducers/tugOfWar";
+export { claimPoins } from "./api/reducers/freePoints";
 
 // views
-
 export { quizView } from "./api/views/quiz";
 
 export default spacetimedb;

@@ -11,7 +11,10 @@ type LobbyProps = {
 export function Lobby(props: LobbyProps) {
   const { isPresenter } = useParticipant(props.deck, props.participants);
   return isPresenter ? (
-    <PresenterLobby joinUrl="clemens.wondrak.at" participants={props.participants} />
+    <PresenterLobby
+      joinUrl={import.meta.env.VITE_CLIENT_HOST_URL}
+      participants={props.participants}
+    />
   ) : (
     <ParticipantLobby {...props} />
   );

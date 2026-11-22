@@ -7,6 +7,7 @@ const slideKind = t.enum("slideKind", {
   quiz: t.u32(),
   tugOfWar: t.u32(),
   code: t.string(),
+  freePoints: t.u8(),
 });
 
 export const slide = table(

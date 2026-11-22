@@ -191,6 +191,13 @@ quizResult,
     },
   },
   {
+    title: "That was a lot of theory have some free points",
+    kind: {
+      tag: "freePoints",
+      value: 10,
+    },
+  },
+  {
     title: "Reducers / Definition",
     kind: {
       tag: "text",
@@ -199,13 +206,6 @@ quizResult,
 - transactional
 - have parameters
 - never have return values`,
-    },
-  },
-  {
-    title: "Lets do a performance test",
-    kind: {
-      tag: "tugOfWar",
-      value: 0,
     },
   },
   {
@@ -236,10 +236,35 @@ quizResult,
     },
   },
   {
+    title: "Reducers / How do I escape the transacton?",
+    kind: {
+      tag: "text",
+      value: `there is a special type of reducer called a procedure
+- procedures can open and close transaction for long running tasks
+- they can interact have access to http requests
+- they have input parameters and return values
+- they can be called by a schedular`,
+    },
+  },
+  {
     title: "Modules / Definition",
     kind: {
       tag: "text",
       value: "",
+    },
+  },
+  {
+    title: "Lets do a performance test",
+    kind: {
+      tag: "tugOfWar",
+      value: 0,
+    },
+  },
+  {
+    title: "and another one",
+    kind: {
+      tag: "tugOfWar",
+      value: 1,
     },
   },
   {
@@ -263,16 +288,28 @@ quizResult,
     },
   },
   {
-    title: "Host / Self-Hosted",
+    title: "Host / SLAs",
     kind: {
-      tag: "quiz",
-      value: 1,
+      tag: "text",
+      value: `
+offical uptime requirement: 99.5%  in a given calaneder month
+quote from founder:
+> I’m just going to cut off a random employees finger for every minute of downtime we have`,
     },
   },
   {
-    title: "and another one",
+    title: "Host / Self hosting",
     kind: {
-      tag: "tugOfWar",
+      tag: "text",
+      value: `Broadly speaking there are two ways to run Spacetime:
+- Maincloud
+- Self-Hosted`,
+    },
+  },
+  {
+    title: "Host / Self-Hosted",
+    kind: {
+      tag: "quiz",
       value: 1,
     },
   },

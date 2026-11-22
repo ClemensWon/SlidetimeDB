@@ -7,6 +7,8 @@ import { QuizPresenterSlide } from "./quiz/quizPresenterSlide";
 import { TugOfWarPresenterSlide } from "./tugOfWar/TugOfWarPresenterSlide";
 import { TugOfWarAudienceSlide } from "./tugOfWar/TugOfWarAudienceSlide";
 import { CodeSlide } from "./code-slide";
+import { FreePointsPresenterSlide } from "./freePoints/freePointsPresenterSlide";
+import { FreePointsAudienceSlide } from "./freePoints/freePointsAudianceSlide";
 
 type SlideProps = { slide: Slide; deck: Deck; particpiants: readonly Participant[] };
 
@@ -28,6 +30,12 @@ export function SlideView(props: SlideProps) {
         <TugOfWarPresenterSlide tugOfWarId={props.slide.kind.value} />
       ) : (
         <TugOfWarAudienceSlide tugOfWarId={props.slide.kind.value} />
+      );
+    case "FreePoints":
+      return isPresenter ? (
+        <FreePointsPresenterSlide pointsLeft={props.slide.kind.value} />
+      ) : (
+        <FreePointsAudienceSlide pointsLeft={props.slide.kind.value} />
       );
   }
 }

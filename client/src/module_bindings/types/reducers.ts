@@ -7,6 +7,7 @@ import { type Infer as __Infer } from "spacetimedb";
 
 // Import all reducer arg schemas
 import ClaimDeckReducer from "../claim_deck_reducer";
+import ClaimPoinsReducer from "../claim_poins_reducer";
 import GoToSlideReducer from "../go_to_slide_reducer";
 import JoinDeckReducer from "../join_deck_reducer";
 import JoinTeamTugOfWarReducer from "../join_team_tug_of_war_reducer";
@@ -21,6 +22,7 @@ import StartQuizReducer from "../start_quiz_reducer";
 import StartTugOfWarReducer from "../start_tug_of_war_reducer";
 
 export type ClaimDeckParams = __Infer<typeof ClaimDeckReducer>;
+export type ClaimPoinsParams = __Infer<typeof ClaimPoinsReducer>;
 export type GoToSlideParams = __Infer<typeof GoToSlideReducer>;
 export type JoinDeckParams = __Infer<typeof JoinDeckReducer>;
 export type JoinTeamTugOfWarParams = __Infer<typeof JoinTeamTugOfWarReducer>;
