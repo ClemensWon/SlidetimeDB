@@ -17,12 +17,12 @@ export function TugOfWarAudienceSlide({ tugOfWarId }: { tugOfWarId: number }) {
   const phase = game.state.tag;
 
   const status = {
-    scheduled: "Get ready, teams open soon.",
-    joiningTeams: myTeam
+    Scheduled: "Get ready, teams open soon.",
+    JoiningTeams: myTeam
       ? `You're on ${TEAMS[myTeam].name}. Waiting for the start…`
       : "Tap a team to join.",
-    ongoing: myTeam ? `Your pulls: ${myPulls}` : "You're watching this round.",
-    results: !winner
+    Ongoing: myTeam ? `Your pulls: ${myPulls}` : "You're watching this round.",
+    Results: !winner
       ? ""
       : myTeam === winner
         ? "Your team won! +3 points"
