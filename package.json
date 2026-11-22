@@ -12,7 +12,9 @@
     "db:start": "spacetime start",
     "db:publish": "spacetime publish slidetimedb --server local --module-path server",
     "db:publish:prod": "spacetime publish slidetimedb --server railway --module-path server",
-    "db:generate": "spacetime generate --lang typescript --module-path server --out-dir client/src/module_bindings"
+    "db:generate": "spacetime generate --lang typescript --module-path server --out-dir client/src/module_bindings",
+    "db:delete": "spacetime delete slidetimedb --server local",
+    "db:delete:prod": "spacetime delete slidetimedb --server railway"
   },
   "dependencies": {
     "@tailwindcss/typography": "^0.5.20",

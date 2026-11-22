@@ -6,6 +6,7 @@ import { Leaderboard, LeaderboardSheet } from "../leaderboard/leaderbord";
 import { ReactionBar } from "../action-bar/reaction-bar";
 import { SlideView } from "../slide/slide";
 import { SlideHeader } from "../slide/slide-header";
+import { useParticipant } from "@/hooks/useParticipant";
 
 export function Presentation({
   deck,
@@ -16,8 +17,7 @@ export function Presentation({
   slides: readonly Slide[];
   participants: readonly Participant[];
 }) {
-  const { identity } = useSpacetimeDB();
-  const isPresenter = !!identity && !!deck.presenter?.isEqual(identity);
+  const { isPresenter, hasJoined } = useParticipant(deck, participants);
 
   const currentSlideNumber = deck.currentSlide;
   const slide = slides.find((slide) => slide.slideNumber === currentSlideNumber);
@@ -34,12 +34,16 @@ export function Presentation({
 
         <main className="min-h-0 flex-1 overflow-y-auto rounded-xl border bg-card p-4 text-card-foreground lg:p-8">
           {slide ? (
-            <SlideView
-              key={slide.slideNumber}
-              slide={slide}
-              particpiants={participants}
-              deck={deck}
-            />
+            hasJoined ? (
+              <SlideView
+                key={slide.slideNumber}
+                slide={slide}
+                particpiants={participants}
+                deck={deck}
+              />
+            ) : (
+              <div>You didn't join</div>
+            )
           ) : (
             <p className="text-muted-foreground">Slide not found</p>
           )}

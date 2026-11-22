@@ -69,7 +69,7 @@ export function useQuizCommand(ctx: CommandCtx) {
     const options = quizOptionsQuery.getByQuizId(quizId);
 
     for (const response of responses) {
-      const chosenOpton = options.find((option) => option.id === response.id);
+      const chosenOpton = options.find((option) => option.id === response.quizOptionId);
       if (!chosenOpton) {
         continue;
       }
