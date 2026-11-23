@@ -15,6 +15,9 @@ import { quizOption } from "./tables/quizOption";
 import { tugOfWar } from "./tables/tugOfWar";
 import { team } from "./tables/teamMembership";
 
+// reaction
+import { reaction } from "./tables/reaction";
+
 export const tables = {
   deck,
   slide,
@@ -24,6 +27,7 @@ export const tables = {
   quizResponse,
   tugOfWar,
   team,
+  reaction,
 };
 export const spacetimedb = schema(tables);
 

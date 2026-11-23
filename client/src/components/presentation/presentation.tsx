@@ -1,12 +1,14 @@
 import type { Deck, Slide, Participant } from "@/module_bindings/types";
 
-import { useSpacetimeDB } from "spacetimedb/react";
+import { useReducer } from "spacetimedb/react";
 import { AdminBar } from "../action-bar/admin-bar";
 import { Leaderboard, LeaderboardSheet } from "../leaderboard/leaderbord";
 import { ReactionBar } from "../action-bar/reaction-bar";
 import { SlideView } from "../slide/slide";
 import { SlideHeader } from "../slide/slide-header";
 import { useParticipant } from "@/hooks/useParticipant";
+import { reducers } from "@/module_bindings";
+import { ReactionOverlay } from "../action-bar/reaction-overlay";
 
 export function Presentation({
   deck,
@@ -18,6 +20,7 @@ export function Presentation({
   participants: readonly Participant[];
 }) {
   const { isPresenter, hasJoined } = useParticipant(deck, participants);
+  const sendReaction = useReducer(reducers.sendReaction);
 
   const currentSlideNumber = deck.currentSlide;
   const slide = slides.find((slide) => slide.slideNumber === currentSlideNumber);
@@ -34,7 +37,7 @@ export function Presentation({
 
         <main className="min-h-0 flex-1 overflow-y-auto rounded-xl border bg-card p-4 text-card-foreground lg:p-8">
           {slide ? (
-            hasJoined ? (
+            hasJoined || isPresenter ? (
               <SlideView
                 key={slide.slideNumber}
                 slide={slide}
@@ -42,7 +45,7 @@ export function Presentation({
                 deck={deck}
               />
             ) : (
-              <div>You didn't join</div>
+              <div>You didn't join :(</div>
             )
           ) : (
             <p className="text-muted-foreground">Slide not found</p>
@@ -56,13 +59,14 @@ export function Presentation({
             participantCount={participants.length}
           />
         ) : (
-          <ReactionBar onReact={(emoji) => console.log("reaction", emoji)} />
+          <ReactionBar onReact={(emoji) => sendReaction({ emoji })} />
         )}
       </div>
 
       <aside className="hidden w-72 shrink-0 lg:block">
         <Leaderboard players={participants} />
       </aside>
+      <ReactionOverlay />
     </div>
   );
 }

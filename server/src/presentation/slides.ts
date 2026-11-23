@@ -14,7 +14,7 @@ export const slides: SlideValues[] = [
       tag: "text",
       value: `This talk will be a mix of
 - Slide
-- Quizes
+- Quizzes
 - Games
 
 You will be able to earn points and the top 3 will be able to win a small prize`,
@@ -23,38 +23,34 @@ You will be able to earn points and the top 3 will be able to win a small prize`
   {
     title: "Introduction / Prizes",
     kind: {
-      tag: "image",
-      value: "./link-to-prizes",
+      tag: "text",
+      value: `the prizes are Spacetime merch from their merch store:
+- coffee mug
+- notebook
+- cap
+
+I will award the prizes in the coming weeks, since not everything has been delivered, sorry :)`,
     },
   },
   {
-    title: "Overiew / What is Spacetime",
+    title: "Overview / What is Spacetime",
     kind: {
       tag: "text",
-      value: `Spacetime is the reactive backend platform. It has build-in:
+      value: `Spacetime is the reactive backend platform. It has built-in:
   - Database
   - Server Logic
   - Authentication
-  - Deployment Mangement
-  - Real-Time Sync`,
+  - Deployment Management`,
     },
   },
   {
-    title: "Overiew / What makes Spacetime different",
+    title: "Overview / What makes Spacetime different",
     kind: {
       tag: "text",
       value: `
   - Your code runs **inside** the database
-  - Everything is **reactive** by default
-  - Everything is **persistant** by default
-  - Everything is **code first** by default`,
-    },
-  },
-  {
-    title: "Overiew / The origin of Spacetime",
-    kind: {
-      tag: "image",
-      value: "./link-to-BitCraft",
+  - Everything is **real-time** by default
+  - Everything is **persistent** by default`,
     },
   },
   {
@@ -70,7 +66,14 @@ You will be able to earn points and the top 3 will be able to win a small prize`
     },
   },
   {
-    title: "Overiew / Key Concepts",
+    title: "Overview / The origin of Spacetime",
+    kind: {
+      tag: "quiz",
+      value: 2,
+    },
+  },
+  {
+    title: "Overview / Key Concepts",
     kind: {
       tag: "text",
       value: `
@@ -83,18 +86,24 @@ You will be able to earn points and the top 3 will be able to win a small prize`
     },
   },
   {
-    title: "Overview / Language Support",
+    title: "Overview / Key Concepts Diagram",
     kind: {
-      tag: "text",
-      value: `These languages are officially supported, both on server and client
-- C#
-- C++
-- Rust
-- Typescript`,
+      tag: "keyConcepts",
     },
   },
   {
-    title: "Performance of Languages",
+    title: "Overview / Language Support",
+    kind: {
+      tag: "text",
+      value: `These languages are officially supported, both on server and client. They run in an isolated sandbox
+- C# runs as WebAssembly
+- C++ runs as WebAssembly
+- Rust runs as WebAssembly
+- TypeScript as JavaScript`,
+    },
+  },
+  {
+    title: "Language Performance",
     kind: {
       tag: "quiz",
       value: 0,
@@ -106,10 +115,10 @@ You will be able to earn points and the top 3 will be able to win a small prize`
       tag: "text",
       value: `
 - defined in Code
-- free sever and client models based on the table definition
+- free server and client models based on the table definition
 - data is stored in memory by default
 - visibility can be configured to control read-access
-- can only be modifed  through a reducer`,
+- can only be modified through a reducer`,
     },
   },
   {
@@ -141,6 +150,17 @@ You will be able to earn points and the top 3 will be able to win a small prize`
     },
   },
   {
+    title: "Tables / Event Tables",
+    kind: {
+      tag: "text",
+      value: `
+- doesn't persist any data
+- used for messaging clients
+- comparable with message queuing systems like Kafka or RabbitMQ
+- this is how the live reactions are implemented 🤯`,
+    },
+  },
+  {
     title: "Tables / Views Definition",
     kind: {
       tag: "text",
@@ -148,7 +168,7 @@ You will be able to earn points and the top 3 will be able to win a small prize`
 - read only functions
 - they appear as tables to the client
 - they can be used to restrict access to tables or build more complex types for clients
-- views can be anyonmus or user specific`,
+- views can be anonymous or user specific`,
     },
   },
   {
@@ -165,7 +185,7 @@ quizResult,
   try {
     return quizQuery.getQuizObject();
   } catch (exception) {
-    console.error("an exception occured", exception);
+    console.error("an exception occurred", exception);
     return undefined;
   }
 });`,
@@ -194,7 +214,7 @@ quizResult,
     title: "That was a lot of theory have some free points",
     kind: {
       tag: "freePoints",
-      value: 10,
+      value: 20,
     },
   },
   {
@@ -222,49 +242,53 @@ quizResult,
     title: "Reducers / Logic",
     kind: {
       tag: "code",
-      value: `function goToSlide(slideNumber: number) {
-  userQuery.throwIfNotPresenter(ctx.sender);
-  const slideExists = ctx.db.slide.slideNumber.find(slideNumber) !== null;
-  if (!slideExists) {
-    throw new SenderError("slide not available");
-  }
+      value: `function claimFreePoints() {
+const deck = deckQuery.getDeckOrThrow();
+const currentSlide = slideQuery.getBySlidenumberOrThrow(deck.currentSlide);
+if (currentSlide.kind.tag !== "freePoints") {
+  throw new SenderError("can't claim free points on this type of slide");
 
-  const deck = deckQuery.getDeckOrThrow();
+const participant = participantQuery.getByIdentityOrThrow(ctx.sender);
+ctx.db.participant.identity.update({ ...participant, score: participant.score + 1
+const pointsleft = currentSlide.kind.value - 1;
+if (pointsleft < 0) {
+  throw new SenderError("no points left");
 
-  ctx.db.deck.id.update({ ...deck, currentSlide: slideNumber });
+ctx.db.slide.slideNumber.update({
+  ...currentSlide,
+  kind: {
+    tag: "freePoints",
+    value: pointsleft,
+  },
+});
 }`,
     },
   },
   {
-    title: "Reducers / How do I escape the transacton?",
+    title: "Reducers / How do I escape the transaction?",
     kind: {
       tag: "text",
       value: `there is a special type of reducer called a procedure
 - procedures can open and close transaction for long running tasks
 - they can interact have access to http requests
 - they have input parameters and return values
-- they can be called by a schedular`,
+- they can be called by a scheduler`,
+    },
+  },
+  {
+    title: "More free points",
+    kind: {
+      tag: "freePoints",
+      value: 25,
     },
   },
   {
     title: "Modules / Definition",
     kind: {
       tag: "text",
-      value: "",
-    },
-  },
-  {
-    title: "Lets do a performance test",
-    kind: {
-      tag: "tugOfWar",
-      value: 0,
-    },
-  },
-  {
-    title: "and another one",
-    kind: {
-      tag: "tugOfWar",
-      value: 1,
+      value: `A module is the collection of the schema and business logic. There are currently two ways modules can interact with each other:
+- Submodules: are reusable modules that run in the same process as their parent module. Think of them as libraries
+- Inter Module Communication: are async calls between two modules running on the same host. Useful for Sharding`,
     },
   },
   {
@@ -292,9 +316,9 @@ quizResult,
     kind: {
       tag: "text",
       value: `
-offical uptime requirement: 99.5%  in a given calaneder month
+official uptime requirement: 99.5%  in a given calendar month
 quote from founder:
-> I’m just going to cut off a random employees finger for every minute of downtime we have`,
+> I’m just going to cut off a random employee's finger for every minute of downtime we have`,
     },
   },
   {
@@ -311,6 +335,58 @@ quote from founder:
     kind: {
       tag: "quiz",
       value: 1,
+    },
+  },
+  {
+    title: "Let's do a performance test",
+    kind: {
+      tag: "tugOfWar",
+      value: 0,
+    },
+  },
+  {
+    title: "Scaling / How to Scale a database",
+    kind: {
+      tag: "text",
+      value: `there are 3 directions to scale a database
+- Compute
+- Storage
+- Networking`,
+    },
+  },
+  {
+    title: "Scaling / How does Spacetime scale",
+    kind: {
+      tag: "text",
+      value: `
+- Compute => Sharding
+- Storage => Tiered Storage
+- Networking => Read Replicas (coming in the future)
+`,
+    },
+  },
+  {
+    title: "Scaling / Parallelism",
+    kind: {
+      tag: "text",
+      value: `
+  ![SpacetimeDB architecture](https://spacetimedb.com/images/blog/how-does-spacetime-scale/single-core-bell-curve-meme.png)
+  `,
+    },
+  },
+  {
+    title: "End / Last Game",
+    kind: {
+      tag: "tugOfWar",
+      value: 1,
+    },
+  },
+  {
+    title: "End / Thank you All",
+    kind: {
+      tag: "text",
+      value: `Please give Spacetime a try
+and let's have a great Sharing is Caring Extreme`,
     },
   },
 ];

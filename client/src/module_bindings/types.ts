@@ -94,6 +94,11 @@ export type QuizState = __Infer<typeof QuizState>;
 export const QuizView = __t.object("QuizView", {});
 export type QuizView = __Infer<typeof QuizView>;
 
+export const Reaction = __t.object("Reaction", {
+  emoji: __t.string(),
+});
+export type Reaction = __Infer<typeof Reaction>;
+
 export const Slide = __t.object("Slide", {
   slideNumber: __t.u32(),
   deckId: __t.u32(),
@@ -106,13 +111,12 @@ export type Slide = __Infer<typeof Slide>;
 
 // The tagged union or sum type for the algebraic type `SlideKind`.
 export const SlideKind = __t.enum("SlideKind", {
-  Chapter: __t.unit(),
   Text: __t.string(),
-  Image: __t.string(),
   Quiz: __t.u32(),
   TugOfWar: __t.u32(),
   Code: __t.string(),
   FreePoints: __t.u8(),
+  KeyConcepts: __t.unit(),
 });
 export type SlideKind = __Infer<typeof SlideKind>;
 

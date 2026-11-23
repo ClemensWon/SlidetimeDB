@@ -1,5 +1,6 @@
 import { usePresentationCommand } from "./services/commands/presentationCommand";
 import { spacetimedb } from "./domain/schema";
+import { sendReaction } from "./api/reducers/reaction";
 
 // reducers
 export {
@@ -17,6 +18,7 @@ export {
   startTugOfWar,
 } from "./api/reducers/tugOfWar";
 export { claimPoins } from "./api/reducers/freePoints";
+export { sendReaction };
 
 // views
 export { quizView } from "./api/views/quiz";

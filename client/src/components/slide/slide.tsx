@@ -9,6 +9,7 @@ import { TugOfWarAudienceSlide } from "./tugOfWar/TugOfWarAudienceSlide";
 import { CodeSlide } from "./code-slide";
 import { FreePointsPresenterSlide } from "./freePoints/freePointsPresenterSlide";
 import { FreePointsAudienceSlide } from "./freePoints/freePointsAudianceSlide";
+import { KeyConceptsSlide } from "./KeyConceptsSlide";
 
 type SlideProps = { slide: Slide; deck: Deck; particpiants: readonly Participant[] };
 
@@ -37,5 +38,7 @@ export function SlideView(props: SlideProps) {
       ) : (
         <FreePointsAudienceSlide pointsLeft={props.slide.kind.value} />
       );
+    case "KeyConcepts":
+      return <KeyConceptsSlide />;
   }
 }

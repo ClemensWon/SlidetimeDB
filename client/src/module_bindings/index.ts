@@ -44,6 +44,7 @@ import PullOnTugReducer from "./pull_on_tug_reducer";
 import ResetPresentationReducer from "./reset_presentation_reducer";
 import RespondToQuizReducer from "./respond_to_quiz_reducer";
 import RevealAnswersReducer from "./reveal_answers_reducer";
+import SendReactionReducer from "./send_reaction_reducer";
 import ShowResultsReducer from "./show_results_reducer";
 import StartPresentationReducer from "./start_presentation_reducer";
 import StartQuizReducer from "./start_quiz_reducer";
@@ -55,6 +56,7 @@ import StartTugOfWarReducer from "./start_tug_of_war_reducer";
 import DeckRow from "./deck_table";
 import ParticipantRow from "./participant_table";
 import QuizViewRow from "./quiz_view_table";
+import ReactionRow from "./reaction_table";
 import SlideRow from "./slide_table";
 import TeamRow from "./team_table";
 import TugOfWarRow from "./tug_of_war_table";
@@ -85,6 +87,14 @@ const tablesSchema = __schema({
       { name: 'participant_identity_key', constraint: 'unique', columns: ['identity'] },
     ],
   }, ParticipantRow),
+  reaction: __table({
+    name: 'reaction',
+    indexes: [
+    ],
+    constraints: [
+    ],
+    event: true,
+  }, ReactionRow),
   slide: __table({
     name: 'slide',
     indexes: [
@@ -142,6 +152,7 @@ const reducersSchema = __reducers(
   __reducerSchema("reset_presentation", ResetPresentationReducer),
   __reducerSchema("respond_to_quiz", RespondToQuizReducer),
   __reducerSchema("reveal_answers", RevealAnswersReducer),
+  __reducerSchema("send_reaction", SendReactionReducer),
   __reducerSchema("show_results", ShowResultsReducer),
   __reducerSchema("start_presentation", StartPresentationReducer),
   __reducerSchema("start_quiz", StartQuizReducer),
